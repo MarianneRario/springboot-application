@@ -1,0 +1,24 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create Location</title>
+  </head>
+  <body>
+    <div>
+      <form action="updateLoc" method="post">
+        <pre>
+          <!-- the expression language -> ${"***"} came from the model map in thymeleaf -->
+          Id: <input type="text" name="id" th:value="${location.id}" readonly/>
+          Code: <input type="text" name="code" th:value="${location.code}" />
+          Name: <input type="text" name="name" th:value="${location.name}"/>
+          Type:
+              Urban<input type="radio" name="type" value="URBAN" th:field="*{location.type}"/>
+              Rural<input type="radio" name="type" value="RURAL" th:field="*{location.type}"/>
+        <input type="submit" value="save" />
+      </pre>
+      </form>
+    </div>
+  </body>
+</html>

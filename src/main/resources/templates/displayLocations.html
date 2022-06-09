@@ -32,6 +32,7 @@
         <th>Name</th>
         <th>Type</th>
         <th>Actions</th>
+        <th></th>
     </tr>
     <!-- ${locations} -> came from the modelMap key    -->
     <tr th:each="location:${locations}">
@@ -39,6 +40,7 @@
         <td th:text="${location.code}"></td>
         <td th:text="${location.name}"></td>
         <td th:text="${location.type}"></td>
+        <td><a th:href="@{'editLocation?id='+${location.id}}">Edit</a> </td>
         <td><a th:href="@{'deleteLocation?id='+${location.id}}">Delete</a> </td>
     </tr>
 </table>

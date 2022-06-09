@@ -58,6 +58,8 @@ public class LocationController {
      * @param id should be mapped to from the request parameter
      * @RequestParam -> this tells the spring that it should retrieve the parameter from the url
      * deleteLocation?id -> we can see here that we have used "id"
+     * "/deleteLocation" -> came from href in displayLocation.html
+     * <td><a th:href="@{'deleteLocation?id='+${location.id}}">Delete</a> </td>
      */
     @RequestMapping(path = "/deleteLocation")
     public String deleteLocation(@RequestParam("id") int id, ModelMap modelMap){
@@ -68,7 +70,23 @@ public class LocationController {
         // we're deleting it, and we're sending the list of locations again as a response
         List<Location> locationsList = service.getAllLocations();
         modelMap.addAttribute("locations", locationsList);
+        // then the modelMap will have location list that will then be mapped in our thymeleaf file (displayLocations.html)
+        // kasi pag wala un, wala tayong marereturn dito sa displayLocations (empty lang ung table)
+        return "displayLocations";
+    }
 
+    @RequestMapping(path = "/editLocation")
+    public String editLocation(@RequestParam("id") int id, ModelMap modelMap){
+        Location location = service.getLocationById(id);
+        modelMap.addAttribute("location", location);
+        return "editLocation";  // will render this page (.html)
+    }
+
+    @RequestMapping("/updateLoc") // url that we need to handle in the form
+    public String updateLocation(@ModelAttribute("location")Location location, ModelMap modelMap){
+        Location updatedLocation = service.updateLocation(location);
+        List<Location> locationsList = service.getAllLocations();
+        modelMap.addAttribute("locations", locationsList);
         return "displayLocations";
     }
 
