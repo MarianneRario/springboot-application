@@ -2,6 +2,7 @@ package com.caramellow.location.locationweb.controllers;
 
 import com.caramellow.location.locationweb.model.Location;
 import com.caramellow.location.locationweb.service.LocationService;
+import com.caramellow.location.locationweb.util.EmailUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -17,6 +18,11 @@ public class LocationController {
     // reference of the service file
     @Autowired
     private LocationService service;
+
+    // reference to the util interface
+    @Autowired
+    private EmailUtil email;
+
 
     /**
      * @return createLocation.html
@@ -36,12 +42,21 @@ public class LocationController {
      *
      * @ModelMap           -> handle the response
      *                     -> key value pairs
+     *
+     * Add'l:
+     *      On every data saved in the db, you must send an email on the email that we have setup
      */
     @RequestMapping(path = "/saveLoc") // dapat yung path is parehas sa nakalagay sa form action
     public String saveLocation(@ModelAttribute("location")Location location, ModelMap modelMap){
         Location savedLocation = service.saveLocation(location);
         String msg = "Location saved with id " + savedLocation.getId();
         modelMap.addAttribute("message", msg); // this can be access by the thymeleaf(createLocation.html)
+        // send an email before saving to the db
+        email.sendEmail(
+                "xpringboot@gmail.com",
+                "Location Saved",
+                "Location saved successfully and about to return a response");
+
         return "createLocation";
     }
 
