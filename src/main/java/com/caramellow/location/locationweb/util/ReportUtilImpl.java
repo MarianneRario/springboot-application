@@ -11,6 +11,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+@SuppressWarnings("ALL")
 @Component
 public class ReportUtilImpl implements ReportUtil{
 
@@ -21,8 +22,6 @@ public class ReportUtilImpl implements ReportUtil{
         DefaultPieDataset dataset = new DefaultPieDataset();
 
         for (Object[] obj: data) {
-            System.out.println("mima obj0: " + obj[0].toString());
-            System.out.println("mima obj1: " + obj[1].toString());
             // obj[1].toString() -> is the actual count of the obj in the db count(type)
             dataset.setValue(obj[0].toString(), new Double(obj[1].toString()));
         }
