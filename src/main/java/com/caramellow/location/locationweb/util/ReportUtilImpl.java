@@ -5,11 +5,13 @@ import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
 import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.data.general.PieDataset;
+import org.springframework.stereotype.Component;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+@Component
 public class ReportUtilImpl implements ReportUtil{
 
     @Override
@@ -32,7 +34,7 @@ public class ReportUtilImpl implements ReportUtil{
 
         try {
             ChartUtilities.saveChartAsJPEG(
-                    new File(path), chart, 300, 300);
+                    new File(path + "/pieChart.jpg"), chart, 300, 300);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

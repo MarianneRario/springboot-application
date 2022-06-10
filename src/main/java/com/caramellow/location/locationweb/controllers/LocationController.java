@@ -126,7 +126,7 @@ public class LocationController {
         String path = servletContext.getRealPath("/");
 
         // first, we need to get the data from the database (to do that, we need to inject the repository(LocationRepository))
-        List<Object[]> data = repository.findTypeCount(); // findTypeCount() is only available in LocationRepository and not in LocationServiceImpl that is why we can't use "service"
+        List<Object[]> data = repository.findTypeCount(); // findTypeCount() is only available in LocationRepository and not in Location Impl that is why we can't use "service"
         reportUtil.generatePieChart(path, data);
         return "report";
     }
